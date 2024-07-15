@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\SpeciesRepository;
+use App\Repository\RaceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SpeciesRepository::class)]
+#[ORM\Entity(repositoryClass: RaceRepository::class)]
 #[ApiResource]
-class Species
+class Race
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
