@@ -39,9 +39,13 @@ class Animal
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'animal')]
     private Collection $images;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Species::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Species $species = null;
+    private Species $species;
+
+    #[ORM\ManyToOne(targetEntity: Race::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private Race $race;
 
     #[ORM\Column(type: "string", enumType: Status::class)]
     private Status $status = Status::NOT_READY;
@@ -154,7 +158,28 @@ class Animal
     public function setSpecies(?Species $species): static
     {
         $this->species = $species;
+        return $this;
+    }
 
+    public function getRace(): Race
+    {
+        return $this->race;
+    }
+
+    public function setRace(Race $race): Animal
+    {
+        $this->race = $race;
+        return $this;
+    }
+
+    public function getStatus(): Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(Status $status): Animal
+    {
+        $this->status = $status;
         return $this;
     }
 }
