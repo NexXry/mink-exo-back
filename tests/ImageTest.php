@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ImageTest extends WebTestCase
 {
-    public function testAnimal(): void
+    public function testImage(): void
     {
         $image = new Image();
         $image->setName('angora.png');
