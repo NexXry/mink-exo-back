@@ -13,27 +13,14 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images')]
-    private ?Animal $animal = null;
-
     #[ORM\Column]
     private string $name;
+    #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'images')]
+    private Animal $animal;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAnimal(): ?Animal
-    {
-        return $this->animal;
-    }
-
-    public function setAnimal(?Animal $animal): static
-    {
-        $this->animal = $animal;
-
-        return $this;
     }
 
     public function getName(): string
@@ -44,6 +31,17 @@ class Image
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getAnimal(): Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(Animal $animal): Image
+    {
+        $this->animal = $animal;
         return $this;
     }
 }
