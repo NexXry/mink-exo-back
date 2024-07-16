@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -14,6 +15,7 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['animal_read'])]
     private string $name;
     #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'images')]
     private Animal $animal;

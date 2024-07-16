@@ -10,15 +10,16 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\SpeciesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: SpeciesRepository::class)]
 #[ApiResource(
     operations: [
         new Get(),
         new GetCollection(),
-        new Post(),
-        new Patch(),
-        new Delete()
+        new Post(security: "is_granted('ROLE_ADMIN')"),
+        new Patch(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')")
     ]
 )]
 class Species
@@ -29,6 +30,7 @@ class Species
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['animal_read'])]
     private ?string $name = null;
 
     public function getId(): ?int
