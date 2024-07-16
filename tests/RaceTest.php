@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RaceTest extends WebTestCase
 {
-    public function testAnimal(): void
+    public function testRace(): void
     {
         $race = new Race();
         $race->setName('angora');

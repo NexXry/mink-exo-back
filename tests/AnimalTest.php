@@ -31,7 +31,7 @@ class AnimalTest extends WebTestCase
             ->setRace($race)
             ->setStatus(Status::NOT_READY);
 
-        $this->assertEquals($animal->getName(), 'myrtile');
+        $this->assertEquals($animal->getName(), 'myrtille');
         $this->assertEquals($animal->getAge(), 1);
         $this->assertEquals($animal->getPriceHT(), 40);
         $this->assertEquals($animal->getPriceTTC(), 48);
