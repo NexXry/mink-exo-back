@@ -13,54 +13,65 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(),
-        new GetCollection(),
-        new Post(),
-        new Patch(),
-        new Delete()
-    ]
+        new Get(normalizationContext: ['groups' => ['animal_read']]),
+        new GetCollection(normalizationContext: ['groups' => ['animal_read']]),
+        new Post(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
+        new Patch(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
+        new Delete(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')")
+    ],
 )]
 class Animal
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['animal_read', 'admin'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['animal_read', 'admin'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['animal_read', 'admin'])]
     private ?int $age = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['animal_read', 'admin'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['admin'])]
     private ?float $priceHT = null;
 
     #[ORM\Column]
+    #[Groups(['animal_read', 'admin'])]
     private ?float $priceTTC = null;
 
     /**
      * @var Collection<int, Image>
      */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'animal')]
+    #[Groups(['animal_read', 'admin'])]
     private Collection $images;
 
     #[ORM\ManyToOne(targetEntity: Species::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['animal_read', 'admin'])]
     private Species $species;
 
     #[ORM\ManyToOne(targetEntity: Race::class)]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['animal_read', 'admin'])]
     private Race $race;
 
     #[ORM\Column(type: "string", enumType: Status::class)]
+    #[Groups(['animal_read', 'admin'])]
     private Status $status = Status::NOT_READY;
 
     public function __construct()
