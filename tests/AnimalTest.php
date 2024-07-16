@@ -22,7 +22,7 @@ class AnimalTest extends WebTestCase
         $race = new Race();
         $race->setName('angora');
 
-        $animal->setName('myrtile')
+        $animal->setName('myrtille')
             ->setAge(1)
             ->setPriceHT(40)
             ->setPriceTTC(48)
