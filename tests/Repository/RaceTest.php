@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Repository;
 
 use App\DataFixtures\AppFixtures;
-use App\Repository\AnimalRepository;
+use App\Repository\SpeciesRepository;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AnimalTest extends WebTestCase
+class RaceTest extends WebTestCase
 {
     protected AbstractDatabaseTool $databaseTool;
 
@@ -23,9 +23,9 @@ class AnimalTest extends WebTestCase
         ]);
         $container = static::getContainer();
 
-        $animalRepo = $container->get(AnimalRepository::class);
-        $countAnimal = $animalRepo->count([]);
+        $raceRepo = $container->get(SpeciesRepository::class);
+        $countRace = $raceRepo->count([]);
 
-        $this->assertEquals(1, $countAnimal);
+        $this->assertEquals(1, $countRace);
     }
 }
