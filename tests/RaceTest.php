@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Entity\Race;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase;
 
-class RaceTest extends WebTestCase
+class RaceTest extends TestCase
 {
     public function testRace(): void
     {
