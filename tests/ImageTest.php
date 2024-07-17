@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Entity\Image;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase;
 
-class ImageTest extends WebTestCase
+class ImageTest extends TestCase
 {
     public function testImage(): void
     {

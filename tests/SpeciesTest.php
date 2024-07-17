@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Entity\Species;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase;
 
-class SpeciesTest extends WebTestCase
+class SpeciesTest extends TestCase
 {
     public function testSpecies(): void
     {

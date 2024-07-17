@@ -8,9 +8,9 @@ use App\Entity\Animal;
 use App\Entity\Race;
 use App\Entity\Species;
 use App\Entity\Status;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase;
 
-class AnimalTest extends WebTestCase
+class AnimalTest extends TestCase
 {
     public function testAnimal(): void
     {
