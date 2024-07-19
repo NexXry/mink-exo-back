@@ -13,6 +13,7 @@ use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
@@ -38,7 +39,7 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['animal_read', 'image_read', 'admin'])]
+    #[Groups(['image_read', 'admin'])]
     #[ORM\Column]
     private string $name;
 
@@ -48,9 +49,11 @@ class Image
 
     #[ApiProperty(writable: false)]
     #[ORM\Column(nullable: true)]
+    #[Groups(['image_read', 'animal_read','admin'])]
     public ?string $filePath = null;
 
     #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'images')]
+    #[Assert\NotNull]
     private Animal $animal;
 
     #[ORM\Column(nullable: true)]
