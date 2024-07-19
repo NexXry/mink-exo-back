@@ -22,5 +22,8 @@
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
-.idea
-.idea/*
+/public/
+/public/*
+/.idea/
+/.idea/*
+/composer.phar

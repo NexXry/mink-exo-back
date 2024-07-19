@@ -24,6 +24,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
         new Patch(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
         new Delete(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')")
     ],
+    outputFormats: ['jsonld' => ['application/ld+json']],
 )]
 class Animal
 {
