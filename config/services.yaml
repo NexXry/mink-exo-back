@@ -22,8 +22,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
     App\Serializer\AnimalContextBuilder:
         decorates: 'api_platform.serializer.context_builder'
         arguments: [ '@App\Serializer\AnimalContextBuilder.inner' ]
         autoconfigure: false
+
+    App\Encoder\MultipartDecoder:
+        arguments:
+            $requestStack: '@request_stack'
+        tags:
+            - { name: 'serializer.encoder' }
