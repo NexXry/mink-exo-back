@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
         new Get(normalizationContext: ['groups' => ['animal_read']]),
         new GetCollection(normalizationContext: ['groups' => ['animal_read']]),
         new Post(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
-        new Patch(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
+        new Patch(normalizationContext: ['groups' => ['admin','animal_read',]], security: "is_granted('ROLE_ADMIN')"),
         new Delete(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')")
     ],
     outputFormats: ['jsonld' => ['application/ld+json']],

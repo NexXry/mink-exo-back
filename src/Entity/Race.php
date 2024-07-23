@@ -30,7 +30,7 @@ class Race
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['animal_read'])]
+    #[Groups(['animal_read', 'admin'])]
     private ?string $name = null;
 
     public function getId(): ?int
