@@ -26,8 +26,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             normalizationContext: ['groups' => ['admin']],
             security: "is_granted('ROLE_ADMIN')",
         ),
-        new Patch(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
-        new Delete(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')")
+        new Patch(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_ADMIN')")
     ],
     outputFormats: ['jsonld' => ['application/ld+json']],
 )]
@@ -37,23 +37,24 @@ class Image
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['animal_read', 'admin','image_read'])]
     private ?int $id = null;
 
-    #[Groups(['image_read', 'admin'])]
+    #[Groups(['animal_read', 'admin','image_read'])]
     #[ORM\Column]
     private string $name;
 
-    #[Groups(['image_read', 'admin'])]
+    #[Groups(['animal_read', 'admin','image_read'])]
     #[Vich\UploadableField(mapping: 'animals', fileNameProperty: 'filePath')]
     private ?File $imageFile = null;
 
-    #[ApiProperty(writable: false)]
     #[ORM\Column(nullable: true)]
-    #[Groups(['image_read', 'animal_read','admin'])]
+    #[Groups(['animal_read', 'admin','image_read'])]
     public ?string $filePath = null;
 
     #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'images')]
     #[Assert\NotNull]
+    #[Groups(['image_read'])]
     private Animal $animal;
 
     #[ORM\Column(nullable: true)]
@@ -101,4 +102,15 @@ class Image
     {
         return $this->imageFile;
     }
+
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    public function setFilePath(?string $filePath): void
+    {
+        $this->filePath = $filePath;
+    }
+
 }
