@@ -60,7 +60,6 @@ class Animal
      */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'animal')]
     #[Groups(['animal_read', 'admin'])]
-    #[MaxDepth(1)]
     private Collection $images;
 
     #[ORM\ManyToOne(targetEntity: Species::class)]
