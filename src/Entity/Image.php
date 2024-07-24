@@ -47,7 +47,7 @@ class Image
     #[Vich\UploadableField(mapping: 'animals', fileNameProperty: 'filePath')]
     private ?File $imageFile = null;
 
-    #[ApiProperty(writable: false)]
+    #[ApiProperty(readable: true,writable: false)]
     #[ORM\Column(nullable: true)]
     #[Groups(['image_read', 'animal_read', 'admin'])]
     public ?string $filePath = null;
@@ -102,4 +102,15 @@ class Image
     {
         return $this->imageFile;
     }
+
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    public function setFilePath(?string $filePath): void
+    {
+        $this->filePath = $filePath;
+    }
+
 }
