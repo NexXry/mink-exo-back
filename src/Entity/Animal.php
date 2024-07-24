@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
@@ -21,7 +22,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
         new Get(normalizationContext: ['groups' => ['animal_read']]),
         new GetCollection(normalizationContext: ['groups' => ['animal_read']]),
         new Post(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')"),
-        new Patch(normalizationContext: ['groups' => ['admin','animal_read',]], security: "is_granted('ROLE_ADMIN')"),
+        new Patch(normalizationContext: ['groups' => ['admin', 'animal_read',]], security: "is_granted('ROLE_ADMIN')"),
         new Delete(normalizationContext: ['groups' => ['admin']], security: "is_granted('ROLE_ADMIN')")
     ],
     outputFormats: ['jsonld' => ['application/ld+json']],
@@ -31,7 +32,7 @@ class Animal
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['animal_read', 'admin'])]
+    #[Groups(['animal_read', 'admin', 'image_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -59,6 +60,7 @@ class Animal
      */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'animal')]
     #[Groups(['animal_read', 'admin'])]
+    #[MaxDepth(1)]
     private Collection $images;
 
     #[ORM\ManyToOne(targetEntity: Species::class)]

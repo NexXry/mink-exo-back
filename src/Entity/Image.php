@@ -49,11 +49,12 @@ class Image
 
     #[ApiProperty(writable: false)]
     #[ORM\Column(nullable: true)]
-    #[Groups(['image_read', 'animal_read','admin'])]
+    #[Groups(['image_read', 'animal_read', 'admin'])]
     public ?string $filePath = null;
 
     #[ORM\ManyToOne(targetEntity: Animal::class, inversedBy: 'images')]
     #[Assert\NotNull]
+    #[Groups(['image_read'])]
     private Animal $animal;
 
     #[ORM\Column(nullable: true)]
