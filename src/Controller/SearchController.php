@@ -23,6 +23,6 @@ class SearchController extends AbstractController
 
         $animals = $animalRepository->findSearchAnimal($query);
 
-        return $this->json($animals, Response::HTTP_OK, [], ['groups' => 'animal:read']);
+        return $this->json($animals, Response::HTTP_OK, context: ['groups' => 'animal_read']);
     }
 }
